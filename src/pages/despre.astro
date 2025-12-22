@@ -1,0 +1,191 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import AgentCard from '@components/AgentCard.astro';
+import CTASection from '@components/CTASection.astro';
+
+const team = await getCollection('team');
+const sortedTeam = team.sort((a, b) => a.data.order - b.data.order);
+
+const breadcrumbs = [
+  { label: 'Acasă', href: '/' },
+  { label: 'Despre noi' },
+];
+---
+
+<BaseLayout
+  title="Despre noi | Apartamente Gara Peris"
+  description="Află mai multe despre proiectul de apartamente din Gara Peris și echipa noastră dedicată."
+>
+  <Header slot="header" currentPage="despre" />
+
+  <!-- Intro Section -->
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">Despre noi</h1>
+            <span class="color-text-a">Apartamente Gara Peris</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section-about">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="/assets/img/about-1.jpg" alt="Apartamente Gara Peris" class="img-fluid rounded mb-4" />
+        </div>
+        <div class="col-md-6">
+          <div class="about-content">
+            <h2 class="title-a mb-4">Proiectul nostru</h2>
+            <p class="color-text-a mb-3">
+              Apartamentele din Gara Peris reprezintă un proiect imobiliar modern, conceput pentru familiile care își doresc o locuință de calitate la un preț accesibil, cu acces rapid la București.
+            </p>
+            <p class="color-text-a mb-3">
+              Construite în 2023 cu materiale de calitate superioară, apartamentele noastre oferă confortul unei locuințe moderne și durabilitatea unei construcții solide din cărămidă.
+            </p>
+            <p class="color-text-a mb-4">
+              Localizate vizavi de gara Peris, beneficiezi de acces rapid cu trenul la București în doar 30 de minute - mult mai rapid și mai confortabil decât naveta cu mașina.
+            </p>
+
+            <h3 class="title-b mb-3">De ce să alegi apartamentele noastre?</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Construcție nouă din 2023
+              </li>
+              <li class="mb-2">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Materiale de calitate superioară
+              </li>
+              <li class="mb-2">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Izolație termică și fonică excelentă
+              </li>
+              <li class="mb-2">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Loc de parcare inclus
+              </li>
+              <li class="mb-2">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Acces rapid la București (30 min cu trenul)
+              </li>
+              <li class="mb-2">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Magazine și facilități în apropiere
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  {sortedTeam.length > 0 && (
+    <section class="section-agents section-t8">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-wrap d-flex justify-content-between">
+              <div class="title-box">
+                <h2 class="title-a">Echipa noastră</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          {sortedTeam.map((member) => (
+            <div class="col-md-4">
+              <AgentCard
+                name={member.data.name}
+                image={member.data.image}
+                bio={member.data.bio}
+                phone={member.data.phone}
+                email={member.data.email}
+                socials={member.data.socials}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Stats Section -->
+  <section class="section-counter paralax-mf bg-image" style="background-image: url(/assets/img/slide-2.jpg)">
+    <div class="overlay-mf"></div>
+    <div class="container position-relative">
+      <div class="row">
+        <div class="col-sm-6 col-md-3">
+          <div class="counter-box text-center">
+            <span class="counter">2023</span>
+            <p class="text-white">Anul construcției</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="counter-box text-center">
+            <span class="counter">6</span>
+            <p class="text-white">Apartamente</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="counter-box text-center">
+            <span class="counter">30</span>
+            <p class="text-white">Minute până în București</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="counter-box text-center">
+            <span class="counter">100</span>
+            <p class="text-white">% Satisfacție</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTASection />
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .section-counter {
+    padding: 80px 0;
+    position: relative;
+  }
+
+  .overlay-mf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .counter-box .counter {
+    font-size: 48px;
+    font-weight: 700;
+    color: #2eca6a;
+    display: block;
+  }
+
+  .counter-box p {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+</style>

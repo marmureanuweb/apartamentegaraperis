@@ -1,0 +1,106 @@
+---
+import BlogCard from './BlogCard.astro';
+
+interface BlogPost {
+  slug: string;
+  title: string;
+  image: string;
+  category: string;
+  date: Date;
+}
+
+interface Props {
+  posts: BlogPost[];
+  title?: string;
+  viewAllHref?: string;
+  viewAllText?: string;
+  class?: string;
+}
+
+const {
+  posts,
+  title = 'Ultimele articole',
+  viewAllHref = '/blog',
+  viewAllText = 'Vezi toate',
+  class: className = '',
+} = Astro.props;
+---
+
+<section class:list={['section-news section-t8', className]}>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">{title}</h2>
+          </div>
+          {viewAllHref && (
+            <div class="title-link">
+              <a href={viewAllHref}>
+                {viewAllText}
+                <span class="bi bi-chevron-right"></span>
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <div id="news-carousel" class="swiper">
+      <div class="swiper-wrapper">
+        {posts.map((post) => (
+          <div class="swiper-slide">
+            <BlogCard
+              slug={post.slug}
+              title={post.title}
+              image={post.image}
+              category={post.category}
+              date={post.date}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="news-carousel-pagination carousel-pagination"></div>
+  </div>
+</section>
+
+<script>
+  import Swiper from 'swiper';
+  import { Autoplay, Pagination } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/pagination';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new Swiper('#news-carousel', {
+      modules: [Autoplay, Pagination],
+      speed: 600,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      slidesPerView: 'auto',
+      pagination: {
+        el: '.news-carousel-pagination',
+        type: 'bullets',
+        clickable: true,
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        992: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+      },
+    });
+  });
+</script>

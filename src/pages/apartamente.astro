@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import PropertyCard from '@components/PropertyCard.astro';
+import CTASection from '@components/CTASection.astro';
+
+const allProperties = await getCollection('properties');
+const properties = allProperties.sort((a, b) => a.data.order - b.data.order);
+
+const breadcrumbs = [
+  { label: 'Acasă', href: '/' },
+  { label: 'Apartamente' },
+];
+---
+
+<BaseLayout
+  title="Apartamente de vanzare in Gara Peris | Vezi toate apartamentele"
+  description="Descoperă toate apartamentele disponibile în Gara Peris. Apartamente moderne cu 2 camere, construite în 2023, cu acces rapid la București."
+>
+  <Header slot="header" currentPage="apartamente" />
+
+  <!-- Intro Section -->
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">Apartamente disponibile</h1>
+            <span class="color-text-a">Gara Peris, Ilfov</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Properties Grid -->
+  <section class="property-grid grid">
+    <div class="container">
+      <div class="row">
+        {properties.map((property) => (
+          <div class="col-md-4 mb-4">
+            <PropertyCard
+              id={property.id}
+              title={property.data.title}
+              image={property.data.images[0]?.src || '/assets/img/property-1.jpg'}
+              price={property.data.price}
+              currency={property.data.currency}
+              status={property.data.status === 'disponibil' ? 'vanzare' : property.data.status === 'rezervat' ? 'rezervat' : 'vanzare'}
+              area={property.data.area}
+              bedrooms={property.data.bedrooms}
+              bathrooms={property.data.bathrooms}
+              garages={property.data.garage ? 1 : 0}
+            />
+          </div>
+        ))}
+      </div>
+
+      {properties.length === 0 && (
+        <div class="row">
+          <div class="col-12 text-center py-5">
+            <p class="text-muted">Nu există apartamente disponibile momentan.</p>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTASection />
+
+  <Footer slot="footer" />
+</BaseLayout>

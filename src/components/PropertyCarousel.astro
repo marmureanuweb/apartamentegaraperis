@@ -1,0 +1,120 @@
+---
+import PropertyCard from './PropertyCard.astro';
+
+interface Property {
+  id: string;
+  title: string;
+  image: string;
+  price: number;
+  currency?: string;
+  status?: 'vanzare' | 'inchiriere' | 'rezervat';
+  area: number;
+  bedrooms: number;
+  bathrooms: number;
+  garages?: number;
+}
+
+interface Props {
+  properties: Property[];
+  title?: string;
+  viewAllHref?: string;
+  viewAllText?: string;
+  class?: string;
+}
+
+const {
+  properties,
+  title = 'Tipuri apartament',
+  viewAllHref = '/apartamente',
+  viewAllText = 'Vezi toate',
+  class: className = '',
+} = Astro.props;
+---
+
+<section class:list={['section-property section-t8', className]}>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">{title}</h2>
+          </div>
+          {viewAllHref && (
+            <div class="title-link">
+              <a href={viewAllHref}>
+                {viewAllText}
+                <span class="bi bi-chevron-right"></span>
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <div id="property-carousel" class="swiper">
+      <div class="swiper-wrapper">
+        {properties.map((property) => (
+          <div class="swiper-slide">
+            <PropertyCard
+              id={property.id}
+              title={property.title}
+              image={property.image}
+              price={property.price}
+              currency={property.currency}
+              status={property.status}
+              area={property.area}
+              bedrooms={property.bedrooms}
+              bathrooms={property.bathrooms}
+              garages={property.garages}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="propery-carousel-pagination carousel-pagination"></div>
+  </div>
+</section>
+
+<script>
+  import Swiper from 'swiper';
+  import { Autoplay, Pagination } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/pagination';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new Swiper('#property-carousel', {
+      modules: [Autoplay, Pagination],
+      speed: 600,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      slidesPerView: 'auto',
+      pagination: {
+        el: '.propery-carousel-pagination',
+        type: 'bullets',
+        clickable: true,
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        992: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        1200: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      },
+    });
+  });
+</script>

@@ -1,0 +1,45 @@
+---
+interface Props {
+  title?: string;
+  embedUrl?: string;
+  height?: number;
+  class?: string;
+}
+
+const {
+  title = 'Locație',
+  embedUrl = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d178.20184527863154!2d25.997525432898225!3d44.677528261585394!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b217af3fbafc43%3A0x49ff98f48b0f0c24!2zUGVyaciZ!5e0!3m2!1sen!2sro!4v1766353479795!5m2!1sen!2sro',
+  height = 450,
+  class: className = '',
+} = Astro.props;
+---
+
+<section class:list={['section-property section-t8', className]}>
+  <div class="container">
+    {title && (
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-wrap d-flex justify-content-between">
+            <div class="title-box">
+              <h2 class="title-a">{title}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+    <div class="row">
+      <div class="col-md-12">
+        <iframe
+          src={embedUrl}
+          width="100%"
+          height={height}
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Google Maps - Apartamente Gara Peris"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>

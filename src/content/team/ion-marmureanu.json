@@ -1,0 +1,19 @@
+{
+  "name": "Ion Marmureanu",
+  "role": "Administrator",
+  "bio": "Cu experiență în dezvoltare imobiliară, Ion coordonează proiectul de apartamente din Gara Peris, asigurând calitatea construcției și satisfacția clienților.",
+  "image": "/assets/img/agent-7.jpg",
+  "phone": "0040723658451",
+  "email": "contact@apartamentegaraperis.web.app",
+  "socials": [
+    {
+      "platform": "facebook",
+      "url": "https://www.facebook.com/profile.php?id=61585622155044"
+    },
+    {
+      "platform": "whatsapp",
+      "url": "https://wa.me/40723658451"
+    }
+  ],
+  "order": 1
+}

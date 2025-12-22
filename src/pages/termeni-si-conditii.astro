@@ -1,0 +1,130 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+
+const breadcrumbs = [
+  { label: 'Acasă', href: '/' },
+  { label: 'Termeni și condiții' },
+];
+---
+
+<BaseLayout
+  title="Termeni și condiții | Apartamente Gara Peris"
+  description="Termeni și condiții de utilizare a site-ului Apartamente Gara Peris."
+>
+  <Header slot="header" />
+
+  <!-- Intro Section -->
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">Termeni și condiții</h1>
+            <span class="color-text-a">Ultima actualizare: Ianuarie 2024</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="content-box">
+            <h2>1. Introducere</h2>
+            <p>
+              Bine ați venit pe site-ul Apartamente Gara Peris. Prin accesarea și utilizarea acestui site, acceptați să respectați acești termeni și condiții de utilizare.
+            </p>
+
+            <h2>2. Utilizarea site-ului</h2>
+            <p>
+              Site-ul apartamentegaraperis.web.app este destinat informării publicului cu privire la apartamentele disponibile spre vânzare în Gara Peris, Ilfov.
+            </p>
+            <p>
+              Informațiile prezentate pe acest site au caracter informativ și nu constituie o ofertă fermă de vânzare. Prețurile și disponibilitatea pot suferi modificări fără notificare prealabilă.
+            </p>
+
+            <h2>3. Proprietate intelectuală</h2>
+            <p>
+              Conținutul acestui site, inclusiv dar fără a se limita la texte, imagini, logo-uri și design, este proprietatea Apartamente Gara Peris sau a licențiatorilor săi și este protejat de legile privind drepturile de autor.
+            </p>
+
+            <h2>4. Informații despre proprietăți</h2>
+            <p>
+              Fotografiile și descrierile apartamentelor sunt realizate cu bună credință. Cu toate acestea, pot exista diferențe minore între imaginile prezentate și aspectul real al proprietăților. Vă recomandăm să programați o vizită pentru a vedea apartamentele în persoană.
+            </p>
+
+            <h2>5. Confidențialitate</h2>
+            <p>
+              Datele personale furnizate prin intermediul formularelor de contact vor fi utilizate exclusiv pentru a răspunde solicitărilor dumneavoastră. Nu vom partaja informațiile personale cu terți fără consimțământul explicit.
+            </p>
+
+            <h2>6. Limitarea răspunderii</h2>
+            <p>
+              Apartamente Gara Peris nu își asumă răspunderea pentru eventualele erori sau omisiuni din conținutul site-ului. Utilizatorii sunt încurajați să verifice informațiile direct cu reprezentanții noștri.
+            </p>
+
+            <h2>7. Modificări ale termenilor</h2>
+            <p>
+              Ne rezervăm dreptul de a modifica acești termeni și condiții în orice moment. Modificările vor intra în vigoare imediat după publicarea pe site.
+            </p>
+
+            <h2>8. Contact</h2>
+            <p>
+              Pentru întrebări legate de acești termeni și condiții, ne puteți contacta la:
+            </p>
+            <ul>
+              <li>Email: contact@apartamentegaraperis.web.app</li>
+              <li>Telefon: 0723 658 451</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .content-box {
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .content-box h2 {
+    color: #2eca6a;
+    font-size: 1.5rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .content-box h2:first-child {
+    margin-top: 0;
+  }
+
+  .content-box p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+  }
+
+  .content-box ul {
+    color: #555;
+    padding-left: 20px;
+  }
+
+  .content-box li {
+    margin-bottom: 8px;
+  }
+</style>

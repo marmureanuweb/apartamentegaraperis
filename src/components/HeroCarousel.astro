@@ -1,0 +1,82 @@
+---
+interface Slide {
+  image: string;
+  location?: string;
+  title: string;
+  price?: string;
+  href?: string;
+}
+
+interface Props {
+  slides: Slide[];
+  class?: string;
+}
+
+const { slides, class: className = '' } = Astro.props;
+---
+
+<div class:list={['intro intro-carousel swiper position-relative', className]}>
+  <div class="swiper-wrapper">
+    {slides.map((slide) => (
+      <div
+        class="swiper-slide carousel-item-a intro-item bg-image"
+        style={`background-image: url(${slide.image})`}
+      >
+        <div class="overlay overlay-a"></div>
+        <div class="intro-content display-table">
+          <div class="table-cell">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="intro-body">
+                    {slide.location && (
+                      <p class="intro-title-top" set:html={slide.location.replace(/\n/g, '<br />')} />
+                    )}
+                    <h1 class="intro-title mb-4" set:html={slide.title.replace(/\n/g, '<br />')} />
+                    {slide.price && (
+                      <p class="intro-subtitle intro-price">
+                        {slide.href ? (
+                          <a href={slide.href}>
+                            <span class="price-a">{slide.price}</span>
+                          </a>
+                        ) : (
+                          <span class="price-a">{slide.price}</span>
+                        )}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="swiper-pagination"></div>
+</div>
+
+<script>
+  import Swiper from 'swiper';
+  import { Autoplay, Pagination } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/pagination';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new Swiper('.intro-carousel', {
+      modules: [Autoplay, Pagination],
+      speed: 600,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      slidesPerView: 'auto',
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true,
+      },
+    });
+  });
+</script>

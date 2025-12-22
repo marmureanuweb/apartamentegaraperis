@@ -1,0 +1,96 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  image: string;
+  price: number;
+  currency?: string;
+  status?: 'vanzare' | 'inchiriere' | 'rezervat';
+  area: number;
+  bedrooms: number;
+  bathrooms: number;
+  garages?: number;
+  href?: string;
+  class?: string;
+}
+
+const {
+  id,
+  title,
+  image,
+  price,
+  currency = 'EUR',
+  status = 'vanzare',
+  area,
+  bedrooms,
+  bathrooms,
+  garages = 0,
+  href,
+  class: className = '',
+} = Astro.props;
+
+const propertyUrl = href || `/apartamente/${id}`;
+
+const statusLabels = {
+  vanzare: 'vanzare',
+  inchiriere: 'inchiriere',
+  rezervat: 'rezervat',
+};
+
+const formatPrice = (price: number, currency: string) => {
+  return new Intl.NumberFormat('ro-RO', {
+    style: 'currency',
+    currency: currency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(price);
+};
+---
+
+<div class:list={['carousel-item-b', className]}>
+  <div class="card-box-a card-shadow">
+    <div class="img-box-a">
+      <img src={image} alt={title} class="img-a img-fluid" loading="lazy" />
+    </div>
+    <div class="card-overlay">
+      <div class="card-overlay-a-content">
+        <div class="card-header-a">
+          <h2 class="card-title-a">
+            <a href={propertyUrl} set:html={title.replace(/\n/g, '<br />')} />
+          </h2>
+        </div>
+        <div class="card-body-a">
+          <div class="price-box d-flex">
+            <span class="price-a">{statusLabels[status]} | {formatPrice(price, currency)}</span>
+          </div>
+          <a href={propertyUrl} class="link-a">
+            Vezi detalii
+            <span class="bi bi-chevron-right"></span>
+          </a>
+        </div>
+        <div class="card-footer-a">
+          <ul class="card-info d-flex justify-content-around">
+            <li>
+              <h4 class="card-info-title">Suprafață</h4>
+              <span>{area}m<sup>2</sup></span>
+            </li>
+            <li>
+              <h4 class="card-info-title">Dormitoare</h4>
+              <span>{bedrooms}</span>
+            </li>
+            <li>
+              <h4 class="card-info-title">Băi</h4>
+              <span>{bathrooms}</span>
+            </li>
+            {garages > 0 && (
+              <li>
+                <h4 class="card-info-title">Garaje</h4>
+                <span>{garages}</span>
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

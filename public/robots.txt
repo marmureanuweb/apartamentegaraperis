@@ -1,0 +1,11 @@
+# Robots.txt for Apartamente Gara Peris
+# https://apartamentegaraperis.web.app
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://apartamentegaraperis.web.app/sitemap-index.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

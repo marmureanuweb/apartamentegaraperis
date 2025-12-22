@@ -1,0 +1,56 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  image: string;
+  category: string;
+  date: Date;
+  href?: string;
+  class?: string;
+}
+
+const {
+  slug,
+  title,
+  image,
+  category,
+  date,
+  href,
+  class: className = '',
+} = Astro.props;
+
+const postUrl = href || `/blog/${slug}`;
+
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('ro-RO', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }).format(date);
+};
+---
+
+<div class:list={['carousel-item-c', className]}>
+  <div class="card-box-b card-shadow news-box">
+    <div class="img-box-b">
+      <img src={image} alt={title} class="img-b img-fluid" loading="lazy" />
+    </div>
+    <div class="card-overlay">
+      <div class="card-header-b">
+        <div class="card-category-b">
+          <a href={`/blog?category=${encodeURIComponent(category)}`} class="category-b">
+            {category}
+          </a>
+        </div>
+        <div class="card-title-b">
+          <h2 class="title-2">
+            <a href={postUrl} set:html={title.replace(/\n/g, '<br />')} />
+          </h2>
+        </div>
+        <div class="card-date">
+          <span class="date-b">{formatDate(date)}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

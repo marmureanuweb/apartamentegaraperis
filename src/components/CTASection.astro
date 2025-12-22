@@ -1,0 +1,63 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  phone?: string;
+  whatsapp?: string;
+  contactUrl?: string;
+  class?: string;
+}
+
+const {
+  title = 'Interesat de un apartament?',
+  subtitle = 'Contactează-ne acum pentru mai multe detalii sau programează o vizită!',
+  phone = '0040723658451',
+  whatsapp = '40723658451',
+  contactUrl = '/contact',
+  class: className = '',
+} = Astro.props;
+
+const formattedPhone = phone.replace(/^00/, '').replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+---
+
+<section class:list={['section-cta', className]} style="background: linear-gradient(135deg, #2eca6a 0%, #1a9c4a 100%); padding: 80px 0;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10 text-center">
+        <h2 style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-bottom: 20px;">
+          {title}
+        </h2>
+        <p style="color: rgba(255,255,255,0.9); font-size: 1.25rem; margin-bottom: 40px;">
+          {subtitle}
+        </p>
+        <div class="d-flex flex-column flex-md-row justify-content-center gap-4">
+          <a
+            href={`tel:${phone}`}
+            class="btn"
+            style="background: #fff; color: #2eca6a; font-size: 1.25rem; font-weight: 600; padding: 20px 40px; border-radius: 50px; display: inline-flex; align-items: center; gap: 12px; transition: transform 0.3s, box-shadow 0.3s;"
+          >
+            <i class="bi bi-telephone-fill" style="font-size: 1.5rem;"></i>
+            Sună acum: {formattedPhone}
+          </a>
+          <a
+            href={`https://wa.me/${whatsapp}`}
+            target="_blank"
+            class="btn"
+            style="background: #25D366; color: #fff; font-size: 1.25rem; font-weight: 600; padding: 20px 40px; border-radius: 50px; display: inline-flex; align-items: center; gap: 12px; transition: transform 0.3s, box-shadow 0.3s;"
+          >
+            <i class="bi bi-whatsapp" style="font-size: 1.5rem;"></i>
+            WhatsApp
+          </a>
+          <a
+            href={contactUrl}
+            class="btn"
+            style="background: transparent; color: #fff; font-size: 1.25rem; font-weight: 600; padding: 20px 40px; border-radius: 50px; border: 3px solid #fff; display: inline-flex; align-items: center; gap: 12px; transition: transform 0.3s, box-shadow 0.3s;"
+          >
+            <i class="bi bi-envelope-fill" style="font-size: 1.5rem;"></i>
+            Trimite un mesaj
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

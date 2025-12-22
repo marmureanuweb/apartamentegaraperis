@@ -1,0 +1,216 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import HeroCarousel from '@components/HeroCarousel.astro';
+import FeatureCard from '@components/FeatureCard.astro';
+import PropertyCard from '@components/PropertyCard.astro';
+import BlogCard from '@components/BlogCard.astro';
+import CTASection from '@components/CTASection.astro';
+import MapEmbed from '@components/MapEmbed.astro';
+import { featuresConfig, heroSlides } from '@/config/site';
+
+// Get featured properties
+const allProperties = await getCollection('properties');
+const featuredProperties = allProperties
+  .filter(p => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+// Get latest blog posts
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 6);
+---
+
+<BaseLayout title="Apartamente de vanzare in Gara Peris">
+  <Header slot="header" currentPage="home" />
+
+  <!-- Hero Carousel -->
+  <HeroCarousel slides={heroSlides} />
+
+  <!-- Features Section -->
+  <section class="section-services section-t8">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-wrap d-flex justify-content-between">
+            <div class="title-box">
+              <h2 class="title-a">Motive să cumperi în Gara Peris</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        {featuresConfig.map((feature) => (
+          <div class="col-md-4">
+            <FeatureCard
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Properties Section -->
+  <section class="section-property section-t8">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-wrap d-flex justify-content-between">
+            <div class="title-box">
+              <h2 class="title-a">Tipuri apartament</h2>
+            </div>
+            <div class="title-link">
+              <a href="/apartamente">
+                Vezi toate
+                <span class="bi bi-chevron-right"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="property-carousel" class="swiper">
+        <div class="swiper-wrapper">
+          {featuredProperties.map((property) => (
+            <div class="swiper-slide">
+              <PropertyCard
+                id={property.id}
+                title={property.data.title}
+                image={property.data.images[0]?.src || '/assets/img/property-1.jpg'}
+                price={property.data.price}
+                currency={property.data.currency}
+                status={property.data.status === 'disponibil' ? 'vanzare' : property.data.status === 'rezervat' ? 'rezervat' : 'vanzare'}
+                area={property.data.area}
+                bedrooms={property.data.bedrooms}
+                bathrooms={property.data.bathrooms}
+                garages={property.data.garage ? 1 : 0}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="propery-carousel-pagination carousel-pagination"></div>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section class="section-news section-t8">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-wrap d-flex justify-content-between">
+            <div class="title-box">
+              <h2 class="title-a">Ultimele articole</h2>
+            </div>
+            <div class="title-link">
+              <a href="/blog">
+                Vezi toate
+                <span class="bi bi-chevron-right"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="news-carousel" class="swiper">
+        <div class="swiper-wrapper">
+          {latestPosts.map((post) => (
+            <div class="swiper-slide">
+              <BlogCard
+                slug={post.slug}
+                title={post.data.title}
+                image={post.data.image?.src || '/assets/img/post-1.jpg'}
+                category={post.data.category}
+                date={post.data.pubDate}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="news-carousel-pagination carousel-pagination"></div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTASection />
+
+  <!-- Map Section -->
+  <MapEmbed title="Locație" />
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<script>
+  import Swiper from 'swiper';
+  import { Autoplay, Pagination } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/pagination';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Hero Carousel
+    new Swiper('.intro-carousel', {
+      modules: [Autoplay, Pagination],
+      speed: 600,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      slidesPerView: 'auto',
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true,
+      },
+    });
+
+    // Property Carousel
+    new Swiper('#property-carousel', {
+      modules: [Autoplay, Pagination],
+      speed: 600,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.propery-carousel-pagination',
+        type: 'bullets',
+        clickable: true,
+      },
+      breakpoints: {
+        320: { slidesPerView: 1, spaceBetween: 20 },
+        768: { slidesPerView: 2, spaceBetween: 20 },
+        992: { slidesPerView: 3, spaceBetween: 20 },
+        1200: { slidesPerView: 3, spaceBetween: 30 },
+      },
+    });
+
+    // News Carousel
+    new Swiper('#news-carousel', {
+      modules: [Autoplay, Pagination],
+      speed: 600,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.news-carousel-pagination',
+        type: 'bullets',
+        clickable: true,
+      },
+      breakpoints: {
+        320: { slidesPerView: 1, spaceBetween: 20 },
+        768: { slidesPerView: 2, spaceBetween: 20 },
+        992: { slidesPerView: 3, spaceBetween: 20 },
+      },
+    });
+  });
+</script>

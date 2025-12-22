@@ -1,0 +1,10 @@
+/*
+ * Global Styles for Apartamente Gara Peris
+ * This file imports all vendor CSS and custom styles
+ */
+
+/* Bootstrap Icons */
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+/* Custom Styles */
+@import './style.css';

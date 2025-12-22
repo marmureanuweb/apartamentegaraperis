@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import BlogCard from '@components/BlogCard.astro';
+import CTASection from '@components/CTASection.astro';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Get unique categories
+const categories = [...new Set(posts.map((post) => post.data.category))];
+
+const breadcrumbs = [
+  { label: 'Acasă', href: '/' },
+  { label: 'Blog' },
+];
+---
+
+<BaseLayout
+  title="Blog | Apartamente Gara Peris"
+  description="Articole și sfaturi despre apartamentele din Gara Peris, zona, transport și tot ce trebuie să știi înainte de a cumpăra."
+>
+  <Header slot="header" currentPage="blog" />
+
+  <!-- Intro Section -->
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">Blog</h1>
+            <span class="color-text-a">Articole și noutăți</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section class="section-blog">
+    <div class="container">
+      {categories.length > 1 && (
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="blog-categories">
+              <span class="category-label me-2">Categorii:</span>
+              <a href="/blog" class="btn btn-sm btn-success me-2">Toate</a>
+              {categories.map((category) => (
+                <a href={`/blog?category=${encodeURIComponent(category)}`} class="btn btn-sm btn-outline-success me-2">
+                  {category}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div class="row">
+        {posts.map((post) => (
+          <div class="col-md-4 mb-4">
+            <BlogCard
+              slug={post.slug}
+              title={post.data.title}
+              image={post.data.image?.src || '/assets/img/post-1.jpg'}
+              category={post.data.category}
+              date={post.data.pubDate}
+            />
+          </div>
+        ))}
+      </div>
+
+      {posts.length === 0 && (
+        <div class="row">
+          <div class="col-12 text-center py-5">
+            <p class="text-muted">Nu există articole momentan.</p>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTASection />
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .blog-categories {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .category-label {
+    font-weight: 600;
+    color: #333;
+  }
+</style>

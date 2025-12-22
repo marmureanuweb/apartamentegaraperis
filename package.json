@@ -1,0 +1,37 @@
+{
+  "name": "apartamentgaraperis",
+  "version": "1.0.0",
+  "description": "Apartamente de vanzare in Gara Peris",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "typecheck": "astro check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marmureanuweb/apartamentegaraperis.git"
+  },
+  "keywords": [
+    "apartamente",
+    "gara-peris",
+    "real-estate"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marmureanuweb/apartamentegaraperis/issues"
+  },
+  "homepage": "https://github.com/marmureanuweb/apartamentegaraperis#readme",
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/sitemap": "^3.6.0",
+    "astro": "^5.16.6",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "swiper": "^12.0.3",
+    "typescript": "^5.9.3"
+  }
+}

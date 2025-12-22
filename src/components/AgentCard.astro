@@ -1,0 +1,89 @@
+---
+interface SocialLink {
+  platform: 'facebook' | 'twitter' | 'instagram' | 'linkedin' | 'whatsapp';
+  url: string;
+}
+
+interface Props {
+  name: string;
+  image: string;
+  bio?: string;
+  phone?: string;
+  email?: string;
+  socials?: SocialLink[];
+  href?: string;
+  class?: string;
+}
+
+const {
+  name,
+  image,
+  bio = '',
+  phone = '',
+  email = '',
+  socials = [],
+  href,
+  class: className = '',
+} = Astro.props;
+
+const platformIcons: Record<string, string> = {
+  facebook: 'bi-facebook',
+  twitter: 'bi-twitter',
+  instagram: 'bi-instagram',
+  linkedin: 'bi-linkedin',
+  whatsapp: 'bi-whatsapp',
+};
+---
+
+<div class:list={['card-box-d', className]}>
+  <div class="card-img-d">
+    <img src={image} alt={name} class="img-d img-fluid" loading="lazy" />
+  </div>
+  <div class="card-overlay card-overlay-hover">
+    <div class="card-header-d">
+      <div class="card-title-d align-self-center">
+        <h3 class="title-d">
+          {href ? (
+            <a href={href} class="link-two" set:html={name.replace(/\n/g, '<br />')} />
+          ) : (
+            <span set:html={name.replace(/\n/g, '<br />')} />
+          )}
+        </h3>
+      </div>
+    </div>
+    <div class="card-body-d">
+      {bio && (
+        <p class="content-d color-text-a">{bio}</p>
+      )}
+      <div class="info-agents color-a">
+        {phone && (
+          <p>
+            <strong>Telefon: </strong>
+            <a href={`tel:${phone}`}>{phone}</a>
+          </p>
+        )}
+        {email && (
+          <p>
+            <strong>Email: </strong>
+            <a href={`mailto:${email}`}>{email}</a>
+          </p>
+        )}
+      </div>
+    </div>
+    {socials.length > 0 && (
+      <div class="card-footer-d">
+        <div class="socials-footer d-flex justify-content-center">
+          <ul class="list-inline">
+            {socials.map((social) => (
+              <li class="list-inline-item">
+                <a href={social.url} class="link-one" target="_blank" aria-label={social.platform}>
+                  <i class={`bi ${platformIcons[social.platform]}`} aria-hidden="true"></i>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )}
+  </div>
+</div>

@@ -1,0 +1,41 @@
+---
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  href?: string;
+  linkText?: string;
+  class?: string;
+}
+
+const {
+  icon,
+  title,
+  description,
+  href,
+  linkText = 'Citește mai mult',
+  class: className = '',
+} = Astro.props;
+---
+
+<div class:list={['card-box-c foo', className]}>
+  <div class="card-header-c d-flex">
+    <div class="card-box-ico">
+      <span class={`bi ${icon}`}></span>
+    </div>
+    <div class="card-title-c align-self-center">
+      <h2 class="title-c">{title}</h2>
+    </div>
+  </div>
+  <div class="card-body-c">
+    <p class="content-c">{description}</p>
+  </div>
+  {href && (
+    <div class="card-footer-c">
+      <a href={href} class="link-c link-icon">
+        {linkText}
+        <span class="bi bi-chevron-right"></span>
+      </a>
+    </div>
+  )}
+</div>

@@ -1,0 +1,196 @@
+---
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title,
+  description = 'Apartamente de vanzare in Gara Peris - locuinte moderne cu acces rapid la Bucuresti',
+  keywords = 'apartamente de vanzare, apartament de vanzare, apartament gara peris, apartament peris, casa peris',
+  image = '/assets/img/ApartamenteGaraPeris-logo.svg',
+  canonicalUrl,
+} = Astro.props;
+
+const siteUrl = 'https://apartamentegaraperis.web.app';
+const currentPath = Astro.url.pathname;
+const canonical = canonicalUrl || `${siteUrl}${currentPath}`;
+---
+
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Apartamente Gara Peris" />
+    <meta name="theme-color" content="#2eca6a" />
+    <meta name="format-detection" content="telephone=yes" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="ro" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${image}`} />
+    <meta property="og:locale" content="ro_RO" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${image}`} />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/assets/img/ApartamenteGaraPeris-logo.svg" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://maps.googleapis.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+    <!-- Google Fonts with display swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Schema.org LocalBusiness -->
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "name": "Apartamente Gara Peris",
+        "description": "Apartamente de vanzare in Gara Peris - locuinte moderne cu acces rapid la Bucuresti",
+        "url": "https://apartamentegaraperis.web.app",
+        "telephone": "+40723658451",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Peris",
+          "addressCountry": "RO"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 44.677528,
+          "longitude": 25.997525
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <slot name="header" />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <slot name="footer" />
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+      <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script>
+      import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+    </script>
+
+    <!-- Custom JS -->
+    <script>
+      // Navbar scroll effect
+      document.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar-default');
+        if (navbar) {
+          if (window.scrollY > 50) {
+            navbar.classList.add('navbar-reduce');
+            navbar.classList.remove('navbar-trans');
+          } else {
+            navbar.classList.remove('navbar-reduce');
+            navbar.classList.add('navbar-trans');
+          }
+        }
+      });
+
+      // Back to top button
+      const backToTop = document.querySelector('.back-to-top');
+      if (backToTop) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 100) {
+            backToTop.classList.add('active');
+          } else {
+            backToTop.classList.remove('active');
+          }
+        });
+      }
+
+      // Preloader
+      window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+          preloader.remove();
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* Ensure Poppins is applied */
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Back to top button styles */
+  .back-to-top {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    z-index: 996;
+    background: #2eca6a;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    transition: all 0.4s;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .back-to-top.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top i {
+    font-size: 28px;
+    color: #fff;
+    line-height: 0;
+  }
+
+  .back-to-top:hover {
+    background: #3ed47a;
+  }
+</style>

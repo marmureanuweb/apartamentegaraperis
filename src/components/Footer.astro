@@ -1,0 +1,171 @@
+---
+const currentYear = new Date().getFullYear();
+
+const contactInfo = {
+  email: 'contact@apartamentegaraperis.web.app',
+  phone: '0040723658451',
+  whatsapp: '40723658451',
+};
+
+const socialLinks = [
+  {
+    href: 'https://www.facebook.com/profile.php?id=61585622155044',
+    icon: 'bi-facebook',
+    label: 'Facebook',
+  },
+  {
+    href: 'https://maps.app.goo.gl/aSjSyij4e7BZzfqB6',
+    icon: 'bi-geo-alt-fill',
+    label: 'Google Maps',
+  },
+];
+
+const quickLinks = [
+  { href: '/', label: 'Acasa' },
+  { href: '/despre', label: 'Despre' },
+  { href: '/apartamente', label: 'Apartamente' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const websiteLinks = [
+  { href: `https://wa.me/${contactInfo.whatsapp}`, icon: 'bi-whatsapp', label: 'WhatsApp', external: true },
+  { href: '/contact', icon: 'bi-calendar-check', label: 'Programează o vizită', external: false },
+  { href: `tel:${contactInfo.phone}`, icon: 'bi-telephone-fill', label: 'Sună-ne', external: false },
+  { href: '/termeni-si-conditii', icon: 'bi-chevron-right', label: 'Termeni si conditii', external: false },
+  { href: '/politica-cookies', icon: 'bi-chevron-right', label: 'Politica de cookies', external: false },
+];
+
+const benefits = [
+  'Apartamente de vanzare la preturi accesibile în zonă liniștită',
+  'Acces rapid la transport în comun și centrul Bucureștiului',
+  'Apartament Gara Peris cu spații verzi și aer curat în apropiere',
+  'Case Peris cu facilități moderne: școli, magazine, parcuri',
+  'Investiție sigură în imobiliare cu potențial de creștere',
+  'Comunitate prietenoasă și infrastructură în continuă dezvoltare',
+];
+---
+
+<section class="section-footer">
+  <div class="container">
+    <div class="row">
+      <!-- Column 1: Company Info -->
+      <div class="col-sm-12 col-md-4">
+        <div class="widget-a">
+          <div class="w-header-a">
+            <h3 class="w-title-a text-brand">ApartamentePeris</h3>
+          </div>
+          <div class="w-body-a">
+            <p class="w-text-a color-text-a">
+              Apartamente construite in gara Peris, cu o structura foarte buna si loc de parcare.<br />
+              <a href="/apartamente" title="vezi toate apartamentele">Vezi toate apartamentele</a>
+            </p>
+          </div>
+          <div class="w-footer-a">
+            <ul class="list-unstyled">
+              <li class="color-a">
+                <a class="color-text-a" href={`mailto:${contactInfo.email}`}>
+                  Email: <span>{contactInfo.email}</span>
+                </a>
+              </li>
+              <li class="color-a">
+                <a class="color-text-a" href={`tel:${contactInfo.phone}`}>
+                  Tel.: <span>{contactInfo.phone}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: Website Details -->
+      <div class="col-sm-12 col-md-4 section-md-t3">
+        <div class="widget-a">
+          <div class="w-header-a">
+            <h3 class="w-title-a text-brand">Detalii website</h3>
+          </div>
+          <div class="w-body-a">
+            <div class="w-body-a">
+              <ul class="list-unstyled">
+                {websiteLinks.map((link) => (
+                  <li class="item-list-a">
+                    <i class={`bi ${link.icon}`}></i>
+                    <a href={link.href} target={link.external ? '_blank' : undefined}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3: Benefits -->
+      <div class="col-sm-12 col-md-4 section-md-t3">
+        <div class="widget-a">
+          <div class="w-header-a">
+            <h3 class="w-title-a text-brand">De ce apartamente în Gara Peris?</h3>
+          </div>
+          <div class="w-body-a">
+            <ul class="list-unstyled">
+              {benefits.map((benefit) => (
+                <li class="item-list-a">
+                  <i class="bi bi-chevron-right"></i> {benefit}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Navigation -->
+        <nav class="nav-footer">
+          <ul class="list-inline">
+            {quickLinks.map((link) => (
+              <li class="list-inline-item">
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <!-- Social Links -->
+        <div class="socials-a">
+          <ul class="list-inline">
+            {socialLinks.map((social) => (
+              <li class="list-inline-item">
+                <a href={social.href} target="_blank" aria-label={social.label}>
+                  <i class={`bi ${social.icon}`} aria-hidden="true"></i>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Copyright -->
+        <div class="copyright-footer">
+          <p class="copyright color-text-a">
+            &copy; {currentYear} Copyright
+            <span class="color-a">ApartamentePeris</span> All Rights Reserved.
+          </p>
+        </div>
+
+        <!-- Credits -->
+        <div class="credits">
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> / Modified by
+          <a href="https://marmixsoft.com" title="Creeaza o aplicatie web si magazin online simplu" target="_blank">
+            Marmix Soft
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

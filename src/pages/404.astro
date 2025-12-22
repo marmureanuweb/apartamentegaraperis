@@ -1,0 +1,98 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+---
+
+<BaseLayout
+  title="Pagina nu a fost găsită | Apartamente Gara Peris"
+  description="Pagina pe care o cauți nu există sau a fost mutată."
+>
+  <Header slot="header" />
+
+  <!-- 404 Section -->
+  <section class="error-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <div class="error-box">
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Pagina nu a fost găsită</h2>
+            <p class="error-text">
+              Ne pare rău, dar pagina pe care o cauți nu există sau a fost mutată.
+            </p>
+            <div class="error-actions">
+              <a href="/" class="btn btn-success btn-lg me-3">
+                <i class="bi bi-house-door me-2"></i>
+                Acasă
+              </a>
+              <a href="/apartamente" class="btn btn-outline-success btn-lg">
+                <i class="bi bi-building me-2"></i>
+                Vezi apartamentele
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .error-section {
+    padding: 100px 0;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .error-box {
+    background: #fff;
+    padding: 60px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .error-code {
+    font-size: 120px;
+    font-weight: 700;
+    color: #2eca6a;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .error-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  .error-text {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+  .error-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 576px) {
+    .error-code {
+      font-size: 80px;
+    }
+
+    .error-title {
+      font-size: 1.5rem;
+    }
+
+    .error-actions .btn {
+      width: 100%;
+    }
+  }
+</style>

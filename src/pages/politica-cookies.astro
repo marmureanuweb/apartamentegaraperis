@@ -1,0 +1,157 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+
+const breadcrumbs = [
+  { label: 'Acasă', href: '/' },
+  { label: 'Politica cookies' },
+];
+---
+
+<BaseLayout
+  title="Politica cookies | Apartamente Gara Peris"
+  description="Politica de utilizare a cookie-urilor pe site-ul Apartamente Gara Peris."
+>
+  <Header slot="header" />
+
+  <!-- Intro Section -->
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">Politica cookies</h1>
+            <span class="color-text-a">Ultima actualizare: Ianuarie 2024</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="content-box">
+            <h2>1. Ce sunt cookie-urile?</h2>
+            <p>
+              Cookie-urile sunt fișiere text de mici dimensiuni care sunt stocate pe dispozitivul dumneavoastră (computer, tabletă, telefon mobil) atunci când vizitați un site web. Acestea permit site-ului să rețină anumite informații despre vizita dumneavoastră.
+            </p>
+
+            <h2>2. Cum folosim cookie-urile?</h2>
+            <p>
+              Site-ul apartamentegaraperis.web.app folosește cookie-uri pentru a îmbunătăți experiența dumneavoastră de navigare. Utilizăm următoarele tipuri de cookie-uri:
+            </p>
+
+            <h3>Cookie-uri esențiale</h3>
+            <p>
+              Acestea sunt necesare pentru funcționarea corectă a site-ului. Fără aceste cookie-uri, site-ul nu ar putea funcționa corespunzător.
+            </p>
+
+            <h3>Cookie-uri de performanță</h3>
+            <p>
+              Aceste cookie-uri colectează informații despre modul în care vizitatorii folosesc site-ul, de exemplu paginile cele mai vizitate. Toate informațiile colectate de aceste cookie-uri sunt agregate și anonime.
+            </p>
+
+            <h3>Cookie-uri de funcționalitate</h3>
+            <p>
+              Permit site-ului să rețină alegerile pe care le faceți (cum ar fi limba preferată) și să ofere funcții îmbunătățite și personalizate.
+            </p>
+
+            <h2>3. Cookie-uri terță parte</h2>
+            <p>
+              Site-ul nostru poate include conținut de la terțe părți (de exemplu, Google Maps pentru harta locației). Aceste terțe părți pot seta propriile cookie-uri. Nu avem control asupra acestor cookie-uri.
+            </p>
+            <ul>
+              <li><strong>Google Maps</strong> - pentru afișarea hărții cu locația apartamentelor</li>
+              <li><strong>Google Analytics</strong> - pentru analiza traficului (dacă este activat)</li>
+            </ul>
+
+            <h2>4. Cum să gestionezi cookie-urile</h2>
+            <p>
+              Puteți controla și/sau șterge cookie-urile după preferințele dumneavoastră. Puteți șterge toate cookie-urile care sunt deja pe computerul dumneavoastră și puteți seta majoritatea browser-elor să le blocheze.
+            </p>
+            <p>
+              Pentru a gestiona cookie-urile, accesați setările browser-ului dumneavoastră:
+            </p>
+            <ul>
+              <li><strong>Chrome</strong>: Setări → Confidențialitate și securitate → Cookie-uri</li>
+              <li><strong>Firefox</strong>: Opțiuni → Confidențialitate și securitate</li>
+              <li><strong>Safari</strong>: Preferințe → Confidențialitate</li>
+              <li><strong>Edge</strong>: Setări → Cookie-uri și permisiuni site</li>
+            </ul>
+
+            <h2>5. Consecințele dezactivării cookie-urilor</h2>
+            <p>
+              Dacă alegeți să dezactivați cookie-urile, este posibil ca unele funcționalități ale site-ului să nu funcționeze corect. De exemplu, harta cu locația poate să nu se afișeze.
+            </p>
+
+            <h2>6. Actualizări ale politicii</h2>
+            <p>
+              Ne rezervăm dreptul de a modifica această politică de cookie-uri în orice moment. Orice modificări vor fi publicate pe această pagină cu data actualizării.
+            </p>
+
+            <h2>7. Contact</h2>
+            <p>
+              Pentru întrebări legate de această politică, ne puteți contacta la:
+            </p>
+            <ul>
+              <li>Email: contact@apartamentegaraperis.web.app</li>
+              <li>Telefon: 0723 658 451</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .content-box {
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .content-box h2 {
+    color: #2eca6a;
+    font-size: 1.5rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .content-box h2:first-child {
+    margin-top: 0;
+  }
+
+  .content-box h3 {
+    color: #333;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .content-box p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+  }
+
+  .content-box ul {
+    color: #555;
+    padding-left: 20px;
+  }
+
+  .content-box li {
+    margin-bottom: 8px;
+  }
+</style>

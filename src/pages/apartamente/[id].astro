@@ -1,0 +1,452 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import CTASection from '@components/CTASection.astro';
+import { contactConfig } from '@/config/site';
+
+export async function getStaticPaths() {
+  const properties = await getCollection('properties');
+  return properties.map((property) => ({
+    params: { id: property.id },
+    props: { property },
+  }));
+}
+
+interface Props {
+  property: CollectionEntry<'properties'>;
+}
+
+const { property } = Astro.props;
+const { data } = property;
+
+const breadcrumbs = [
+  { label: 'Acasă', href: '/' },
+  { label: 'Apartamente', href: '/apartamente' },
+  { label: data.title },
+];
+
+const statusLabels: Record<string, { text: string; class: string }> = {
+  disponibil: { text: 'Disponibil', class: 'bg-success' },
+  rezervat: { text: 'Rezervat', class: 'bg-warning' },
+  vandut: { text: 'Vândut', class: 'bg-danger' },
+};
+
+const status = statusLabels[data.status] || statusLabels.disponibil;
+
+function formatPrice(price: number, currency: string): string {
+  return new Intl.NumberFormat('ro-RO').format(price) + ' ' + currency;
+}
+
+function getFloorLabel(floor: number | undefined): string {
+  if (floor === undefined) return '-';
+  if (floor === 0) return 'Parter';
+  if (floor === -1) return 'Demisol';
+  return `Etaj ${floor}`;
+}
+
+// Schema.org structured data for the property
+const propertySchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": data.title,
+  "description": data.description,
+  "image": data.images.map(img => `https://apartamentegaraperis.web.app${img.src}`),
+  "offers": {
+    "@type": "Offer",
+    "price": data.price,
+    "priceCurrency": data.currency,
+    "availability": data.status === 'disponibil'
+      ? "https://schema.org/InStock"
+      : data.status === 'rezervat'
+        ? "https://schema.org/LimitedAvailability"
+        : "https://schema.org/SoldOut",
+    "seller": {
+      "@type": "RealEstateAgent",
+      "name": "Apartamente Gara Peris",
+      "telephone": contactConfig.phoneFormatted,
+      "email": contactConfig.email
+    }
+  },
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "name": "Suprafață",
+      "value": data.area,
+      "unitCode": "MTK"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Dormitoare",
+      "value": data.bedrooms
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Băi",
+      "value": data.bathrooms
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "An construcție",
+      "value": data.yearBuilt
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Acasă",
+      "item": "https://apartamentegaraperis.web.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Apartamente",
+      "item": "https://apartamentegaraperis.web.app/apartamente/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": data.title,
+      "item": `https://apartamentegaraperis.web.app/apartamente/${property.id}/`
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={`${data.title} | Apartamente Gara Peris`}
+  description={data.description}
+>
+  <Header slot="header" currentPage="apartamente" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(propertySchema)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <!-- Intro Section -->
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">{data.title}</h1>
+            <span class="color-text-a">{data.address.city}, {data.address.county}</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Property Detail Section -->
+  <section class="property-single nav-arrow-b">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <!-- Image Gallery -->
+          <div id="property-gallery" class="swiper gallery-property-box mb-4">
+            <div class="swiper-wrapper">
+              {data.images.map((image) => (
+                <div class="swiper-slide">
+                  <img src={image.src} alt={image.alt} class="img-fluid rounded" />
+                </div>
+              ))}
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+
+          <!-- Thumbnails -->
+          {data.images.length > 1 && (
+            <div class="gallery-thumbs mb-4">
+              <div class="row g-2">
+                {data.images.map((image, index) => (
+                  <div class="col-3">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      class="img-fluid rounded thumb-img"
+                      data-index={index}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div class="col-lg-4">
+          <!-- Price & Status Box -->
+          <div class="property-price-box mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class={`badge ${status.class} fs-6`}>{status.text}</span>
+              <span class="property-price">{formatPrice(data.price, data.currency)}</span>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="d-grid gap-2">
+              <a href={`tel:${contactConfig.phone}`} class="btn btn-success btn-lg">
+                <i class="bi bi-telephone-fill me-2"></i>
+                Sună acum
+              </a>
+              <a href={`https://wa.me/${contactConfig.whatsapp}?text=Bună ziua, sunt interesat de ${data.title}`} target="_blank" class="btn btn-outline-success btn-lg">
+                <i class="bi bi-whatsapp me-2"></i>
+                Trimite mesaj
+              </a>
+            </div>
+          </div>
+
+          <!-- Property Summary -->
+          <div class="property-summary-box mb-4">
+            <h4 class="title-box-d">Detalii rapide</h4>
+            <ul class="list-unstyled">
+              <li class="d-flex justify-content-between py-2 border-bottom">
+                <span class="text-muted">Suprafață</span>
+                <strong>{data.area} m²</strong>
+              </li>
+              <li class="d-flex justify-content-between py-2 border-bottom">
+                <span class="text-muted">Camere</span>
+                <strong>{data.rooms}</strong>
+              </li>
+              <li class="d-flex justify-content-between py-2 border-bottom">
+                <span class="text-muted">Dormitoare</span>
+                <strong>{data.bedrooms}</strong>
+              </li>
+              <li class="d-flex justify-content-between py-2 border-bottom">
+                <span class="text-muted">Băi</span>
+                <strong>{data.bathrooms}</strong>
+              </li>
+              <li class="d-flex justify-content-between py-2 border-bottom">
+                <span class="text-muted">Etaj</span>
+                <strong>{getFloorLabel(data.floor)}</strong>
+              </li>
+              <li class="d-flex justify-content-between py-2 border-bottom">
+                <span class="text-muted">An construcție</span>
+                <strong>{data.yearBuilt || '-'}</strong>
+              </li>
+              <li class="d-flex justify-content-between py-2">
+                <span class="text-muted">Parcare</span>
+                <strong>{data.parking || data.garage ? 'Da' : 'Nu'}</strong>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description & Features -->
+      <div class="row mt-4">
+        <div class="col-lg-8">
+          <div class="property-description mb-4">
+            <h4 class="title-box-d">Descriere</h4>
+            <p class="description-property">{data.description}</p>
+          </div>
+
+          {data.features && data.features.length > 0 && (
+            <div class="property-features mb-4">
+              <h4 class="title-box-d">Caracteristici</h4>
+              <div class="row">
+                {data.features.map((feature) => (
+                  <div class="col-md-6 mb-2">
+                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                    {feature}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Amenities -->
+          <div class="property-amenities mb-4">
+            <h4 class="title-box-d">Dotări</h4>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <div class={`amenity-item ${data.balcony ? 'active' : 'inactive'}`}>
+                  <i class="bi bi-columns-gap"></i>
+                  <span>Balcon</span>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class={`amenity-item ${data.terrace ? 'active' : 'inactive'}`}>
+                  <i class="bi bi-sun"></i>
+                  <span>Terasă</span>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class={`amenity-item ${data.garden ? 'active' : 'inactive'}`}>
+                  <i class="bi bi-tree"></i>
+                  <span>Grădină</span>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class={`amenity-item ${data.parking ? 'active' : 'inactive'}`}>
+                  <i class="bi bi-p-circle"></i>
+                  <span>Parcare</span>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class={`amenity-item ${data.garage ? 'active' : 'inactive'}`}>
+                  <i class="bi bi-house-door"></i>
+                  <span>Garaj</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <!-- Location -->
+          <div class="property-location mb-4">
+            <h4 class="title-box-d">Locație</h4>
+            <p class="mb-2">
+              <i class="bi bi-geo-alt-fill text-success me-2"></i>
+              {data.address.street && `${data.address.street}, `}
+              {data.address.city}, {data.address.county}
+            </p>
+            {data.coordinates && (
+              <div class="map-box">
+                <iframe
+                  src={`https://maps.google.com/maps?q=${data.coordinates.lat},${data.coordinates.lng}&z=15&output=embed`}
+                  width="100%"
+                  height="250"
+                  style="border:0; border-radius: 8px;"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTASection />
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .property-price-box,
+  .property-summary-box {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+  }
+
+  .property-price {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2eca6a;
+  }
+
+  .title-box-d {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2eca6a;
+  }
+
+  .description-property {
+    color: #555;
+    line-height: 1.8;
+  }
+
+  .gallery-property-box img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .thumb-img {
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    height: 80px;
+    object-fit: cover;
+  }
+
+  .thumb-img:hover,
+  .thumb-img.active {
+    opacity: 1;
+  }
+
+  .amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+  }
+
+  .amenity-item.active {
+    background: #e8f5ec;
+    color: #2eca6a;
+  }
+
+  .amenity-item.inactive {
+    opacity: 0.5;
+    text-decoration: line-through;
+  }
+
+  .amenity-item i {
+    font-size: 1.25rem;
+  }
+
+  :global(.swiper-button-next),
+  :global(.swiper-button-prev) {
+    color: #2eca6a;
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const swiper = new Swiper('#property-gallery', {
+      modules: [Navigation],
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    // Thumbnail click handling
+    const thumbs = document.querySelectorAll('.thumb-img');
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        const index = Number(thumb.getAttribute('data-index'));
+        swiper.slideTo(index);
+
+        thumbs.forEach((t) => t.classList.remove('active'));
+        thumb.classList.add('active');
+      });
+    });
+
+    // Update active thumb on slide change
+    swiper.on('slideChange', () => {
+      thumbs.forEach((t) => t.classList.remove('active'));
+      thumbs[swiper.activeIndex]?.classList.add('active');
+    });
+
+    // Set first thumb as active
+    thumbs[0]?.classList.add('active');
+  });
+</script>

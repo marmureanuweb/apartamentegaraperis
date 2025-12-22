@@ -1,3 +1,9 @@
+# Astro build output
+dist/
+
+# Astro generated types
+.astro/
+
 # Logs
 logs
 *.log
