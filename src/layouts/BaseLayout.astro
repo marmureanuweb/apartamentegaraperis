@@ -1,6 +1,7 @@
 ---
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/global.css';
+import CookieConsent from '@components/CookieConsent.astro';
 
 interface Props {
   title: string;
@@ -68,6 +69,7 @@ const canonical = canonicalUrl || `${siteUrl}${currentPath}`;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://maps.googleapis.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://connect.facebook.net" />
 
     <!-- Google Fonts with display swap -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -155,6 +157,9 @@ const canonical = canonicalUrl || `${siteUrl}${currentPath}`;
         }
       });
     </script>
+
+    <!-- Cookie Consent Banner -->
+    <CookieConsent />
   </body>
 </html>
 
