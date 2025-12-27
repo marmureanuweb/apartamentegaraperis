@@ -1,22 +1,23 @@
 {
-  "title": "Apartament 2 camere - Parter",
-  "description": "Apartament modern cu 2 camere la parter, ideal pentru familii. Construit în 2023 cu materiale de calitate superioară, pereți din cărămidă groasă pentru izolație fonică și termică excelentă. Acces rapid la București în 30 de minute cu trenul.",
-  "price": 45000,
+  "title": "Apartament nr. 7, cu 2 camere - Etaj 1 + Mansardă",
+  "description": "Apartament modern cu 2 camere la etaj, cu mansardă, ideal pentru familii. Apartamentul are o suprafață de 63mp utili + 63mp mansardă locuibilă, cu scară interioară proprie. Construit în 2023 cu materiale de calitate superioară, pereți din cărămidă groasă pentru izolație fonică și termică excelentă. Acces rapid la București în 30 de minute cu trenul.",
+  "price": 94.500,
   "currency": "EUR",
   "status": "disponibil",
   "type": "apartament",
-  "area": 70,
-  "rooms": 3,
+  "area": 63.1,
+  "rooms": 2,
   "bedrooms": 2,
   "bathrooms": 1,
-  "floor": 0,
+  "floor": 1,
   "totalFloors": 2,
-  "parking": true,
+  "parking": false,
   "garage": false,
   "balcony": false,
   "terrace": true,
   "garden": true,
   "yearBuilt": 2023,
+  "mansarda": true,
   "images": [
     {
       "src": "/assets/img/property-1.jpg",
@@ -34,8 +35,9 @@
   "features": [
     "Izolație termică și fonică",
     "Pereți din cărămidă",
-    "Finisaje premium",
-    "Loc de parcare inclus",
+    "Faza construcție interioară la gri",
+    "Geam termopan Salamander tripan",
+    "Loc de parcare optional / neinclus in preț",
     "Terasă privată",
     "Acces la curte comună"
   ],
@@ -49,5 +51,5 @@
     "lng": 25.997525
   },
   "featured": true,
-  "order": 1
+  "order": 3
 }

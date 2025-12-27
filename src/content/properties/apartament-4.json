@@ -1,11 +1,11 @@
 {
-  "title": "Apartament nr. 3, cu 3 camere - Parter",
-  "description": "Apartament modern cu 3 camere la parter, cu terasa, ideal pentru familii. Construit în 2023 cu materiale de calitate superioară, pereți din cărămidă groasă pentru izolație fonică și termică excelentă. Acces rapid la București în 30 de minute cu trenul.",
-  "price": 95000,
+  "title": "Apartament nr. 4, cu 3 camere - Parter",
+  "description": "Apartament modern cu 3 camere la parter, ideal pentru familii. Construit în 2023 cu materiale de calitate superioară, pereți din cărămidă groasă pentru izolație fonică și termică excelentă. Acces rapid la București în 30 de minute cu trenul.",
+  "price": 85000,
   "currency": "EUR",
   "status": "disponibil",
   "type": "apartament",
-  "area": 90.3,
+  "area": 78.2,
   "rooms": 3,
   "bedrooms": 2,
   "bathrooms": 1,
@@ -21,15 +21,15 @@
   "images": [
     {
       "src": "/assets/img/property-1.jpg",
-      "alt": "Apartament 3 camere parter - living"
+      "alt": "Apartament 2 camere parter - living"
     },
     {
       "src": "/assets/img/property-2.jpg",
-      "alt": "Apartament 3 camere parter - dormitor"
+      "alt": "Apartament 2 camere parter - dormitor"
     },
     {
       "src": "/assets/img/property-3.jpg",
-      "alt": "Apartament 3 camere parter - bucătărie"
+      "alt": "Apartament 2 camere parter - bucătărie"
     }
   ],
   "features": [
@@ -51,5 +51,5 @@
     "lng": 25.997525
   },
   "featured": true,
-  "order": 1
+  "order": 2
 }

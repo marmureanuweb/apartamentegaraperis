@@ -93,35 +93,35 @@ const breadcrumbs = [
   </section>
 
   <!-- Team Section -->
-  {sortedTeam.length > 0 && (
-    <section class="section-agents section-t8">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="title-wrap d-flex justify-content-between">
-              <div class="title-box">
-                <h2 class="title-a">Echipa noastră</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          {sortedTeam.map((member) => (
-            <div class="col-md-4">
-              <AgentCard
-                name={member.data.name}
-                image={member.data.image}
-                bio={member.data.bio}
-                phone={member.data.phone}
-                email={member.data.email}
-                socials={member.data.socials}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
+  <!--{sortedTeam.length > 0 && (-->
+  <!--  <section class="section-agents section-t8">-->
+  <!--    <div class="container">-->
+  <!--      <div class="row">-->
+  <!--        <div class="col-md-12">-->
+  <!--          <div class="title-wrap d-flex justify-content-between">-->
+  <!--            <div class="title-box">-->
+  <!--              <h2 class="title-a">Echipa noastră</h2>-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--      <div class="row justify-content-center">-->
+  <!--        {sortedTeam.map((member) => (-->
+  <!--          <div class="col-md-4">-->
+  <!--            <AgentCard-->
+  <!--              name={member.data.name}-->
+  <!--              image={member.data.image}-->
+  <!--              bio={member.data.bio}-->
+  <!--              phone={member.data.phone}-->
+  <!--              email={member.data.email}-->
+  <!--              socials={member.data.socials}-->
+  <!--            />-->
+  <!--          </div>-->
+  <!--        ))}-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </section>-->
+  <!--)}-->
 
   <!-- Stats Section -->
   <section class="section-counter paralax-mf bg-image" style="background-image: url(/assets/img/slide-2.jpg)">
