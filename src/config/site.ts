@@ -85,7 +85,7 @@ export const heroSlides = [
     image: '/assets/img/slide-1.jpg',
     location: 'Gara Peris, Ilfov',
     title: '<span class="color-b">Apartamente</span> Moderne\n<br /> în Gara Peris',
-    price: 'de la 45.000 EUR',
+    price: 'de la 85.000 EUR',
     href: '/apartamente',
   },
   {

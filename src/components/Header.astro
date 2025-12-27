@@ -1,4 +1,6 @@
 ---
+import { contactConfig } from '../config/site';
+
 interface Props {
   currentPage?: string;
 }
@@ -16,19 +18,28 @@ const navItems = [
 
 <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
   <div class="container">
-    <button
-      class="navbar-toggler collapsed"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarDefault"
-      aria-controls="navbarDefault"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+    <div class="d-flex align-items-center d-lg-none">
+      <button
+        class="navbar-toggler collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarDefault"
+        aria-controls="navbarDefault"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a
+        href={`tel:${contactConfig.phone}`}
+        class="btn btn-b-n navbar-toggle-box ms-2"
+        aria-label="Sună acum"
+      >
+        <i class="bi bi-telephone-fill"></i>
+      </a>
+    </div>
 
     <a class="navbar-brand text-brand" href="/">
       Apartamente<span class="color-b">Peris</span>
@@ -38,6 +49,7 @@ const navItems = [
         width="80"
         height="80"
         loading="lazy"
+        class="d-none d-lg-inline-block"
       />
     </a>
 
@@ -56,13 +68,12 @@ const navItems = [
       </ul>
     </div>
 
-    <button
-      type="button"
-      class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarTogglerDemo01"
+    <a
+      href={`tel:${contactConfig.phone}`}
+      class="btn btn-b-n navbar-toggle-box d-none d-lg-block"
+      aria-label="Sună acum"
     >
-      <i class="bi bi-search"></i>
-    </button>
+      <i class="bi bi-telephone-fill"></i>
+    </a>
   </div>
 </nav>
