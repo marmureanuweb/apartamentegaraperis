@@ -316,6 +316,20 @@ const breadcrumbSchema = {
                 </div>
             </div>
           </div>
+
+          {data.roomSurfaces && data.roomSurfaces.length > 0 && (
+            <div class="property-summary-box mb-4">
+              <h4 class="title-box-d">Suprafețe camere</h4>
+              <ul class="list-unstyled">
+                {data.roomSurfaces.map((room, index) => (
+                  <li class={`d-flex justify-content-between py-2 ${index < data.roomSurfaces!.length - 1 ? 'border-bottom' : ''}`}>
+                    <span class="text-muted">{room.name}</span>
+                    <strong>{room.surface} m²</strong>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         <div class="col-lg-4">

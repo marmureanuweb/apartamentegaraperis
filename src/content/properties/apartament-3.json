@@ -24,12 +24,12 @@
       "alt": "Apartament 3 camere parter - living"
     },
     {
-      "src": "/assets/img/property-2.jpg",
-      "alt": "Apartament 3 camere parter - dormitor"
+      "src": "/assets/img/releveu-ap-3.jpg",
+      "alt": "Apartament nr.3 - Gara Peris - 3 camere parter - Releveu"
     },
     {
-      "src": "/assets/img/property-3.jpg",
-      "alt": "Apartament 3 camere parter - bucătărie"
+      "src": "/assets/img/distribuire-ap-3.jpg",
+      "alt": "Apartament nr.3 - Gara Peris - 3 camere parter - Distribuire"
     }
   ],
   "features": [
@@ -37,9 +37,9 @@
     "Pereți din cărămidă",
     "Faza construcție interioară la gri",
     "Geam termopan Salamander tripan",
-    "Loc de parcare optional / neinclus in preț",
     "Terasă privată",
-    "Acces la curte comună"
+    "Acces la curte comună",
+    "Loc de parcare optional / neinclus in preț"
   ],
   "address": {
     "street": "Strada Gării",
@@ -51,5 +51,14 @@
     "lng": 25.997525
   },
   "featured": true,
-  "order": 1
+  "order": 1,
+  "roomSurfaces": [
+    { "name": "Dormitor 1", "surface": 18.1 },
+    { "name": "Dormitor 2", "surface": 15.6 },
+    { "name": "Bucătărie", "surface": 8.5 },
+    { "name": "Baie", "surface": 5.5 },
+    { "name": "Living", "surface": 22.7 },
+    { "name": "Terasă acoperită", "surface": 19.9 },
+    { "name": "SUPRAFATA TOTALA", "surface": 90.3 }
+  ]
 }

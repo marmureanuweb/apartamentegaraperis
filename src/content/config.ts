@@ -55,6 +55,11 @@ const propertiesCollection = defineCollection({
     }).optional(),
     featured: z.boolean().default(false),
     order: z.number().default(0),
+    mansarda: z.boolean().default(false),
+    roomSurfaces: z.array(z.object({
+      name: z.string(),
+      surface: z.number(),
+    })).optional(),
   }),
 });
 

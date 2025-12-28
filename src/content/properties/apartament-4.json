@@ -1,5 +1,5 @@
 {
-  "title": "Apartament nr. 4, cu 3 camere - Parter",
+  "title": "Apartament nr. 4, cu 3 camere - Parter + Spațiu Debara",
   "description": "Apartament modern cu 3 camere la parter, ideal pentru familii. Construit în 2023 cu materiale de calitate superioară, pereți din cărămidă groasă pentru izolație fonică și termică excelentă. Acces rapid la București în 30 de minute cu trenul.",
   "price": 85000,
   "currency": "EUR",
@@ -24,12 +24,12 @@
       "alt": "Apartament 2 camere parter - living"
     },
     {
-      "src": "/assets/img/property-2.jpg",
-      "alt": "Apartament 2 camere parter - dormitor"
+      "src": "/assets/img/releveu-ap-4.jpg",
+      "alt": "Apartament nr.4 - Gara Peris - 3 camere parter - Releveu"
     },
     {
-      "src": "/assets/img/property-3.jpg",
-      "alt": "Apartament 2 camere parter - bucătărie"
+      "src": "/assets/img/distribuire-ap-4.jpg",
+      "alt": "Apartament nr.4 - Gara Peris - 3 camere parter - Distribuire"
     }
   ],
   "features": [
@@ -39,7 +39,8 @@
     "Geam termopan Salamander tripan",
     "Loc de parcare optional / neinclus in preț",
     "Terasă privată",
-    "Acces la curte comună"
+    "Acces la curte comună",
+    "Spațiu debara (7.9mp)"
   ],
   "address": {
     "street": "Strada Gării",
@@ -51,5 +52,15 @@
     "lng": 25.997525
   },
   "featured": true,
-  "order": 2
+  "order": 2,
+  "roomSurfaces": [
+    { "name": "Dormitor 1", "surface": 23.3 },
+    { "name": "Dormitor 2", "surface": 12.1 },
+    { "name": "Bucătărie", "surface": 11.3 },
+    { "name": "Baie", "surface": 5.3 },
+    { "name": "Living", "surface": 17.6 },
+    { "name": "Terasă acoperită", "surface": 8.6 },
+    { "name": "Debara", "surface": 7.9 },
+    { "name": "SUPRAFATA TOTALA", "surface": 86.1 }
+  ]
 }
