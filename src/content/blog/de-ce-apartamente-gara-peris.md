@@ -1,8 +1,8 @@
 ---
 title: "De ce să cumperi un apartament lângă Gara Periș?"
 description: "Descoperă avantajele locuirii lângă Gara Periș - acces rapid la București, prețuri accesibile și o comunitate liniștită."
-pubDate: 2024-01-15
-author: "ApartamentePeris"
+pubDate: 2025-03-15
+author: "Administrator"
 image:
   src: "/assets/img/post-1.jpg"
   alt: "Apartamente lângă Gara Periș"

@@ -1,8 +1,8 @@
 ---
 title: "Calitatea construcției - Ce face apartamentele noastre speciale"
 description: "Află despre materialele și tehnicile de construcție folosite în apartamentele din Gara Peris pentru o locuință durabilă și confortabilă."
-pubDate: 2024-02-10
-author: "ApartamentePeris"
+pubDate: 2025-10-10
+author: "Administrator"
 image:
   src: "/assets/img/post-2.jpg"
   alt: "Calitatea construcției apartamentelor"

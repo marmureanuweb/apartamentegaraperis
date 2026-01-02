@@ -93,7 +93,7 @@ export const heroSlides = [
   {
     image: '/assets/img/slide-2.jpg',
     location: 'La 30 min de București',
-    title: '<span class="color-b">2 Camere</span>\n<br /> cu Finisaje Premium',
+    title: '<span class="color-b">3 Camere</span>\n<br /> cu Finisaje Premium',
     price: '70-90 mp',
     href: '/apartamente',
   },

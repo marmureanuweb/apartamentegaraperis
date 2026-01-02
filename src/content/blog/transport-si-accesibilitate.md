@@ -1,8 +1,8 @@
 ---
 title: "Transport și accesibilitate - Cum ajungi în București în 30 de minute"
 description: "Ghid complet despre opțiunile de transport din Gara Peris către București și împrejurimi."
-pubDate: 2024-03-05
-author: "ApartamentePeris"
+pubDate: 2025-07-05
+author: "Administrator"
 image:
   src: "/assets/img/post-3.jpg"
   alt: "Transport din Gara Peris"
