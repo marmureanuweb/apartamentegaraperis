@@ -221,26 +221,100 @@ const breadcrumbs = [
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const messageDiv = document.getElementById('form-message');
+  const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+  interface ContactApiResponse {
+    success: boolean;
+    message: string;
+    error?: string;
+  }
+
+  /**
+   * Displays a message in the form message container.
+   */
+  function showMessage(type: 'success' | 'danger', message: string): void {
+    if (!messageDiv) return;
+
+    const icon = type === 'success' ? 'check-circle-fill' : 'exclamation-triangle-fill';
+    messageDiv.innerHTML = `
+      <div class="alert alert-${type}">
+        <i class="bi bi-${icon} me-2"></i>
+        ${message}
+      </div>
+    `;
+    messageDiv.style.display = 'block';
+  }
+
+  /**
+   * Toggles the submit button loading state.
+   */
+  function setLoading(isLoading: boolean): void {
+    if (!submitButton) return;
+
+    if (isLoading) {
+      submitButton.disabled = true;
+      submitButton.innerHTML = `
+        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        Se trimite...
+      `;
+    } else {
+      submitButton.disabled = false;
+      submitButton.innerHTML = `
+        <i class="bi bi-send me-2"></i>
+        Trimite mesajul
+      `;
+    }
+  }
 
   if (form && messageDiv) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // For now, show a success message (implement actual form handling later)
-      // Form data can be accessed with: new FormData(form)
-      messageDiv.innerHTML = `
-        <div class="alert alert-success">
-          <i class="bi bi-check-circle-fill me-2"></i>
-          Mulțumim pentru mesaj! Te vom contacta în curând.
-        </div>
-      `;
-      messageDiv.style.display = 'block';
-      form.reset();
+      // Hide any previous messages
+      messageDiv.style.display = 'none';
 
-      // Hide message after 5 seconds
-      setTimeout(() => {
-        messageDiv.style.display = 'none';
-      }, 5000);
+      // Set loading state
+      setLoading(true);
+
+      try {
+        // Collect form data
+        const formData = new FormData(form);
+        const data = {
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone') || undefined,
+          subject: formData.get('subject') || undefined,
+          message: formData.get('message'),
+        };
+
+        // Send request to Firebase Function
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result: ContactApiResponse = await response.json();
+
+        if (result.success) {
+          showMessage('success', result.message);
+          form.reset();
+
+          // Hide success message after 10 seconds
+          setTimeout(() => {
+            messageDiv.style.display = 'none';
+          }, 10000);
+        } else {
+          showMessage('danger', result.message);
+        }
+      } catch (error) {
+        console.error('Contact form error:', error);
+        showMessage('danger', 'A aparut o eroare de conexiune. Te rugam sa incerci din nou.');
+      } finally {
+        setLoading(false);
+      }
     });
   }
 </script>

@@ -192,6 +192,10 @@ const breadcrumbSchema = {
               <span class={`badge ${status.class} fs-6`}>{status.text}</span>
               <span class="property-price">{formatPrice(data.price, data.currency)}</span>
             </div>
+            <!-- Mention how the apartment is sold -->
+            <div id="apartment-sold-info" class="text-center">
+              <p class="fw-bold fs-5 mb-0">Persoana fizica fara TVA</p>
+            </div>
 
             <!-- Quick Actions -->
             <div class="d-grid gap-2">
@@ -226,6 +230,18 @@ const breadcrumbSchema = {
                 <span class="text-muted">Băi</span>
                 <strong>{data.bathrooms}</strong>
               </li>
+              {data.kitchen !== undefined && (
+                <li class="d-flex justify-content-between py-2 border-bottom">
+                  <span class="text-muted">Bucătărie</span>
+                  <strong>{data.kitchen}</strong>
+                </li>
+              )}
+              {data.terrace_surface !== undefined && (
+                <li class="d-flex justify-content-between py-2 border-bottom">
+                  <span class="text-muted">{data.terrace_private !== undefined ? (data.terrace_private ? 'Terasă privată' : 'Terasă comună') : 'Terasă'}</span>
+                  <strong>{data.terrace_surface} m²</strong>
+                </li>
+              )}
               <li class="d-flex justify-content-between py-2 border-bottom">
                 <span class="text-muted">Etaj</span>
                 <strong>{getFloorLabel(data.floor)}</strong>
@@ -269,9 +285,123 @@ const breadcrumbSchema = {
               <h4 class="title-box-d">Finisaje</h4>
               <div class="row">
                   <div class="col-md-12 mb-2">
-                      Apartamentele se vand la gri, cu posibilitatea finisare contra cost la solicitare. <br> Pentru detalii si mai multe poze/video, va rugam sa ne contactati.
+                      Apartamentele se vand la gri, cu posibilitatea finisare contra cost la solicitare. 
+                      <br>
+                      <br>
+                      Ideal pentru personalizare dupa propriul gust.
+                      <br>
+                      <br>
+                       Pentru detalii si mai multe poze/video, va rugam sa ne contactati.
                   </div>
               </div>
+          </div>
+
+          <div class="property-features mb-4" id="nearby-features">
+            <h4 class="title-box-d">In apropriere (10 minute de mers pe jos) se gasesc:</h4>
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Parc
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Stație tren (magistrala București - Ploiești - Brașov)
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Stație autobuz STB (443 și 443B)
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Magazine (Mega Image, Profi, Pepco, Anabella)
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Mini-marketuri cu legume și fructe proaspete
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Farmacii
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Grădiniță, școală, liceu
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Sală de sport, stadion
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Banca CEC
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Brutărie, patiserie, cafenea, cofetărie
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Saloane coafor
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Spălătorii auto
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Service ITP
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Măcelării
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Lacuri pentru pescuit
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Pădurea Scroviștea
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Benzinărie
+              </div>
+            </div>
+          </div>
+          
+          <div class="property-features mb-4" id="nearby-features-auto">
+            <h4 class="title-box-d">Cu masina (15-30 minute) se gasesc:</h4>
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Complex comercial Corbeanca și Snagov
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Spa Therme Bucuresti (<a href="https://therme.ro/" target="_blank">https://therme.ro/</a>)
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Aeroportul Henri Coandă (Otopeni)
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Mânăstirea Țigănești și Snagov
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Palat Scroviște și Snagov
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                DN1 (Bucuresti - Ploiesti) 
+              </div>
+              <div class="col-md-6 mb-2">
+                <i class="bi bi-geo-alt-fill text-success me-2"></i>
+                Autostrada A3 (Bucuresti - Ploiesti)
+              </div>
+            </div>
           </div>
 
           <!-- Amenities -->
