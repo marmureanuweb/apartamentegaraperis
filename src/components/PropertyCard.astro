@@ -8,6 +8,7 @@ interface Props {
   status?: 'vanzare' | 'inchiriere' | 'rezervat';
   area: number;
   bedrooms: number;
+  rooms: number;
   bathrooms: number;
   parking?: boolean;
   mansarda?: string;
@@ -24,6 +25,7 @@ const {
   status = 'vanzare',
   area,
   bedrooms,
+  rooms,
   bathrooms,
   parking = false,
   href,
@@ -49,7 +51,7 @@ const formatPrice = (price: number, currency: string) => {
 ---
 
 <div class:list={['carousel-item-b', className]}>
-  <div class="card-box-a card-shadow">
+  <div class="card-box-a card-shadow apartment-card" data-href={propertyUrl}>
     <div class="img-box-a">
       <img src={image} alt={title} class="img-a img-fluid" loading="lazy" />
     </div>
@@ -76,12 +78,12 @@ const formatPrice = (price: number, currency: string) => {
               <span>{area}m<sup>2</sup></span>
             </li>
             <li>
-              <h4 class="card-info-title">Dormitoare</h4>
-              <span>{bedrooms}</span>
+              <h4 class="card-info-title">Camere</h4>
+              <span>{rooms}</span>
             </li>
             <li>
-              <h4 class="card-info-title">Băi</h4>
-              <span>{bathrooms}</span>
+              <h4 class="card-info-title">Dormitoare</h4>
+              <span>{bedrooms}</span>
             </li>
           </ul>
         </div>
@@ -89,3 +91,25 @@ const formatPrice = (price: number, currency: string) => {
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll<HTMLElement>('.apartment-card');
+    cards.forEach((card) => {
+      const href = card.getAttribute('data-href');
+      if (!href) return;
+
+      card.addEventListener('click', (e) => {
+        // Don't navigate if clicking on a link or button
+        const target = e.target as HTMLElement;
+        if (target && target.closest('a, button')) {
+          return;
+        }
+        window.location.href = href;
+      });
+
+      // Add cursor pointer style
+      card.style.cursor = 'pointer';
+    });
+  });
+</script>
