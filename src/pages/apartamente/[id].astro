@@ -252,7 +252,7 @@ const breadcrumbSchema = {
               </li>
               <li class="d-flex justify-content-between py-2">
                 <span class="text-muted">Parcare</span>
-                <strong>{data.parking || data.garage ? 'Da' : 'Nu'}</strong>
+                <strong>{data.parking ? 'Da' : 'Nu'}</strong>
               </li>
             </ul>
           </div>
@@ -430,12 +430,6 @@ const breadcrumbSchema = {
                 <div class={`amenity-item ${data.parking ? 'active' : 'inactive'}`}>
                   <i class="bi bi-p-circle"></i>
                   <span>Parcare</span>
-                </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                <div class={`amenity-item ${data.garage ? 'active' : 'inactive'}`}>
-                  <i class="bi bi-house-door"></i>
-                  <span>Garaj</span>
                 </div>
               </div>
                 <div class="col-md-4 mb-3">

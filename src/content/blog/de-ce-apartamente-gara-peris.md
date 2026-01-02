@@ -1,11 +1,11 @@
 ---
-title: "De ce să cumperi un apartament în Gara Peris?"
-description: "Descoperă avantajele locuirii în Gara Peris - acces rapid la București, prețuri accesibile și o comunitate liniștită."
+title: "De ce să cumperi un apartament lângă Gara Periș?"
+description: "Descoperă avantajele locuirii lângă Gara Periș - acces rapid la București, prețuri accesibile și o comunitate liniștită."
 pubDate: 2024-01-15
 author: "ApartamentePeris"
 image:
   src: "/assets/img/post-1.jpg"
-  alt: "Apartamente în Gara Peris"
+  alt: "Apartamente lângă Gara Periș"
 category: "Ghid cumpărare"
 tags: ["gara peris", "apartamente", "investiții imobiliare", "bucurești"]
 draft: false
@@ -25,7 +25,7 @@ Unul dintre cele mai mari avantaje ale zonei este **accesul rapid la centrul Buc
 
 ### Prețuri accesibile
 
-Comparativ cu Bucureștiul sau alte suburbii populare, **prețurile în Gara Peris sunt semnificativ mai mici**. Poți achiziționa un apartament modern, nou-construit, la o fracțiune din prețul unui apartament similar în capitală.
+Comparativ cu Bucureștiul sau alte suburbii populare, **prețurile lângă Gara Periș sunt semnificativ mai mici**. Poți achiziționa un apartament modern, nou-construit, la o fracțiune din prețul unui apartament similar în capitală.
 
 ### Zonă liniștită și aer curat
 
@@ -49,4 +49,4 @@ Zona este în continuă dezvoltare, ceea ce înseamnă că valoarea proprietăț
 
 ---
 
-**Ești interesat de un apartament în Gara Peris?** [Contactează-ne](/contact) pentru mai multe detalii sau programează o vizită!
+**Ești interesat de un apartament lângă Gara Periș?** [Contactează-ne](/contact) pentru mai multe detalii sau programează o vizită!

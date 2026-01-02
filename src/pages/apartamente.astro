@@ -17,8 +17,8 @@ const breadcrumbs = [
 ---
 
 <BaseLayout
-  title="Apartamente de vanzare in Gara Peris | Vezi toate apartamentele"
-  description="Descoperă toate apartamentele disponibile în Gara Peris. Apartamente moderne cu 2 camere, construite în 2023, cu acces rapid la București."
+  title="Apartamente de vânzare lângă Gara Periș | Vezi toate apartamentele"
+  description="Descoperă toate apartamentele disponibile lângă Gara Periș. Apartamente moderne cu 3 camere, construite în 2023, cu acces rapid la București."
 >
   <Header slot="header" currentPage="apartamente" />
 
@@ -29,7 +29,7 @@ const breadcrumbs = [
         <div class="col-md-12 col-lg-8">
           <div class="title-single-box">
             <h1 class="title-single">Apartamente disponibile</h1>
-            <span class="color-text-a">Gara Peris, Ilfov</span>
+            <span class="color-text-a">Gara Periș, Ilfov</span>
           </div>
         </div>
         <div class="col-md-12 col-lg-4">
@@ -55,7 +55,6 @@ const breadcrumbs = [
               area={property.data.area}
               bedrooms={property.data.bedrooms}
               bathrooms={property.data.bathrooms}
-              garages={property.data.garage ? 1 : 0}
             />
           </div>
         ))}

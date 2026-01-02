@@ -11,7 +11,7 @@ interface Property {
   area: number;
   bedrooms: number;
   bathrooms: number;
-  garages?: number;
+  parking?: boolean;
 }
 
 interface Props {
@@ -65,7 +65,7 @@ const {
               area={property.area}
               bedrooms={property.bedrooms}
               bathrooms={property.bathrooms}
-              garages={property.garages}
+              parking={property.parking}
             />
           </div>
         ))}

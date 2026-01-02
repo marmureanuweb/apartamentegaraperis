@@ -10,6 +10,8 @@ export const siteConfig = {
 export const contactConfig = {
   phone: '0040723658451',
   phoneFormatted: '0723 658 451',
+  phone2: '0040723658452',
+  phone2Formatted: '0722 498 665',
   whatsapp: '40723658451',
   email: 'contact@apartamentegaraperis.web.app',
   address: {
@@ -55,7 +57,7 @@ export const footerConfig = {
   benefits: [
     'Apartamente de vanzare la preturi accesibile în zonă liniștită',
     'Acces rapid la transport în comun și centrul Bucureștiului',
-    'Apartament Gara Peris cu spații verzi și aer curat în apropiere',
+    'Apartament lângă Gara Periș cu spații verzi și aer curat în apropiere',
     'Case Peris cu facilități moderne: școli, magazine, parcuri',
     'Investiție sigură în imobiliare cu potențial de creștere',
     'Comunitate prietenoasă și infrastructură în continuă dezvoltare',
@@ -84,8 +86,8 @@ export const heroSlides = [
   {
     image: '/assets/img/slide-1.jpg',
     location: 'Gara Peris, Ilfov',
-    title: '<span class="color-b">Apartamente</span> Moderne\n<br /> în Gara Peris',
-    price: 'de la 85.000 EUR',
+    title: '<span class="color-b">Apartamente</span> Moderne\n<br /> lângă Gara Periș',
+    price: 'de la 90.000 EUR',
     href: '/apartamente',
   },
   {

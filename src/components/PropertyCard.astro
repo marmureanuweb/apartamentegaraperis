@@ -9,7 +9,7 @@ interface Props {
   area: number;
   bedrooms: number;
   bathrooms: number;
-  garages?: number;
+  parking?: boolean;
   mansarda?: string;
   href?: string;
   class?: string;
@@ -25,7 +25,7 @@ const {
   area,
   bedrooms,
   bathrooms,
-  garages = 0,
+  parking = false,
   href,
   class: className = '',
 } = Astro.props;
@@ -83,12 +83,6 @@ const formatPrice = (price: number, currency: string) => {
               <h4 class="card-info-title">Băi</h4>
               <span>{bathrooms}</span>
             </li>
-            {garages > 0 && (
-              <li>
-                <h4 class="card-info-title">Garaje</h4>
-                <span>{garages}</span>
-              </li>
-            )}
           </ul>
         </div>
       </div>
